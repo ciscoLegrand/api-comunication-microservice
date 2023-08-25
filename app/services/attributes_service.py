@@ -8,7 +8,7 @@ headers_get = {"Authorization": f"Bearer {TOKEN}"}
 
 def fetch_attributes():
     try:
-        url = f"{BASE_URL}/api/v2/attributes"  # Punto final de ejemplo
+        url = f"{BASE_URL}/api/v2/attributes"
         response = requests.get(url, headers=headers_get)
         
         if response.status_code == 200:

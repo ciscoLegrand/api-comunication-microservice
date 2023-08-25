@@ -1,5 +1,5 @@
 from flask import Flask
-from app.routes import attributes_routes
+from app.routes import attributes_routes, enterprises_routes, answers_routes
 from app.handlers import error_handlers
 
 def create_app():
@@ -7,7 +7,8 @@ def create_app():
     
     # Registrar blueprints
     app.register_blueprint(attributes_routes.attributes_bp, url_prefix='/api')
-
+    app.register_blueprint(enterprises_routes.enterprises_bp, url_prefix='/api')
+    app.register_blueprint(answers_routes.answers_bp, url_prefix='/api')
     # Configurar manejo de errores
     app.register_error_handler(400, error_handlers.handle_400_error)
     app.register_error_handler(401, error_handlers.handle_401_error)

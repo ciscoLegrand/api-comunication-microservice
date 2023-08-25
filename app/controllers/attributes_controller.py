@@ -1,11 +1,13 @@
 from flask import jsonify, request
 import app.utils.logger as logger
 from app.services import attributes_service
+from app.utils.attributes import attribute_data_formatter as formatter
 
 def get_attributes():
     try:
         attributes = attributes_service.list_all_attributes()
-        return jsonify(attributes), 200
+        formatted_attributes = formatter.format_for_display(attributes)
+        return jsonify(formatted_attributes), 200
     except Exception as e:
         logger.log_error(f"🔴 [ERROR] Failed to fetch attributes. Reason: {str(e)}")
         return jsonify({"error": "Failed to fetch attributes."}), 500
@@ -20,6 +22,8 @@ def get_attribute_by_identifier(identifier):
     except Exception as e:
         logger.log_error(f"🔴 [ERROR] Failed to fetch attribute by identifier. Reason: {str(e)}")
         return jsonify({"error": f"Failed to fetch attribute with identifier {identifier}."}), 500
+    
+    
 
 def get_attributes_count():
     try:
