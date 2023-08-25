@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  blipol-api-comunication:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: blipol-api-comunication:latest
+    container_name: blipol-api-comunication
+    ports:
+      - "8081:8081"
+    volumes:
+      - ./app:/app  # Monta el código fuente en el contenedor para desarrollo con hot-reloading
+    environment:
+      - FLASK_ENV=development
+      - FLASK_APP=main.py
+      - FLASK_RUN_HOST=0.0.0.0
+    command: ["flask", "run", "--host=0.0.0.0", "--port=8081", "--no-reload"]
+
